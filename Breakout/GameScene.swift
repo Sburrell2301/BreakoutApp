@@ -10,6 +10,7 @@ import SpriteKit
 import GameplayKit
 
 var ball = SKShapeNode()
+var paddle = SKSpriteNode()
 
 class GameScene: SKScene {
     
@@ -17,6 +18,7 @@ class GameScene: SKScene {
     override func didMove(to view: SKView) {
         createBackground()
         makeBall()
+        makePaddle()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -64,5 +66,13 @@ class GameScene: SKScene {
         ball.physicsBody?.contactTestBitMask = (ball.physicsBody?.collisionBitMask)!
         
         addChild(ball) // add ball object to the view
+    }
+    func makePaddle() {
+        paddle = SKSpriteNode(color: UIColor.white, size: CGSize(width: frame.width/4, height: frame.height/25))
+        paddle.position = CGPoint(x: frame.midX, y: frame.minY + 125)
+        paddle.name = "paddle"
+        paddle.physicsBody = SKPhysicsBody(rectangleOf: paddle.size)
+        paddle.physicsBody?.isDynamic = false
+        addChild(paddle)
     }
 }
