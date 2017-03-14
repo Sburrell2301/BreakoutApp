@@ -11,6 +11,7 @@ import GameplayKit
 
 var ball = SKShapeNode()
 var paddle = SKSpriteNode()
+var brick = SKSpriteNode()
 
 class GameScene: SKScene {
     
@@ -19,6 +20,7 @@ class GameScene: SKScene {
         createBackground()
         makeBall()
         makePaddle()
+        makeBrick()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -75,4 +77,13 @@ class GameScene: SKScene {
         paddle.physicsBody?.isDynamic = false
         addChild(paddle)
     }
+    func makeBrick() {
+        brick = SKSpriteNode(color: UIColor.blue, size: CGSize (width: frame.width/5, height: frame.height/25))
+        brick.position = CGPoint(x: frame.midX, y: frame.maxY - 30)
+        brick.name = "brick"
+        brick.physicsBody = SKPhysicsBody(rectangleOf: brick.size)
+        brick.physicsBody?.isDynamic = false
+        addChild(brick)
+    }
+    
 }
