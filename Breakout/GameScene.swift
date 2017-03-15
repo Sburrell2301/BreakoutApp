@@ -49,6 +49,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             brick.removeFromParent()
             ball.removeFromParent()
         }
+        
         if contact.bodyA.node?.name == "loseZone" || contact.bodyB.node?.name == "brick" {
             print("You lose!")
             ball.removeFromParent()
@@ -69,6 +70,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             starsBackground.run(moveForever)
         }
     }
+    
     func makeBall() {
         ball = SKShapeNode(circleOfRadius: 10)
         ball.position = CGPoint(x: frame.midX, y: frame.midY)
@@ -90,9 +92,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // does not slow down over time
         ball.physicsBody?.linearDamping = 0
         ball.physicsBody?.contactTestBitMask = (ball.physicsBody?.collisionBitMask)!
-        
         addChild(ball) // add ball object to the view
     }
+    
     func makePaddle() {
         paddle = SKSpriteNode(color: UIColor.white, size: CGSize(width: frame.width/4, height: frame.height/25))
         paddle.position = CGPoint(x: frame.midX, y: frame.minY + 125)
@@ -101,6 +103,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         paddle.physicsBody?.isDynamic = false
         addChild(paddle)
     }
+    
     func makeBrick() {
         brick = SKSpriteNode(color: UIColor.blue, size: CGSize (width: frame.width/5, height: frame.height/25))
         brick.position = CGPoint(x: frame.midX, y: frame.maxY - 30)
@@ -109,6 +112,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         brick.physicsBody?.isDynamic = false
         addChild(brick)
     }
+    
     func makeLoseZone() {
         let loseZone = SKSpriteNode(color: UIColor.red, size: CGSize(width: frame.width, height: 50))
         loseZone.position = CGPoint(x: frame.midX, y: frame.minY + 25)
