@@ -26,9 +26,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         physicsWorld.contactDelegate = self
         self.physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
         createBackground()
-        makeBall()
-        makePaddle()
-        makeBrick()
+        resetGame()
         makeLoseZone()
         livesLabeles()
         displayScoreLabel()
@@ -36,6 +34,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ball.physicsBody?.applyImpulse(CGVector(dx: 5, dy: 3))
     }
     
+    func resetGame() {
+        ball.removeFromParent()
+        makeBall()
+        paddle.removeFromParent()
+        makePaddle()
+        makeBrick()
+        updateLabels()
+    }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let location = touch.location(in: self)
@@ -155,5 +161,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreLabels.name = "scoreLabels"
         scoreLabels.fontSize = 20
         addChild(scoreLabels)
+    }
+    func updateLabels() {
+        score = 0
+        lives = 3
+        livesLabeles()
+        displayScoreLabel()
     }
 }
