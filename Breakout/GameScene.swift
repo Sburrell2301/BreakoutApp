@@ -12,6 +12,12 @@ import GameplayKit
 var ball = SKShapeNode()
 var paddle = SKSpriteNode()
 var brick = SKSpriteNode()
+var playLabel = SKLabelNode()
+var livesLabel = SKLabelNode()
+var scoreLabel = SKLabelNode()
+var score = 0
+var lives = 3
+
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
@@ -24,6 +30,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         makePaddle()
         makeBrick()
         makeLoseZone()
+        livesLabeles()
+        displayScoreLabel()
         ball.physicsBody?.isDynamic = true
         ball.physicsBody?.applyImpulse(CGVector(dx: 5, dy: 3))
     }
@@ -47,12 +55,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if contact.bodyA.node?.name == "brick" || contact.bodyB.node?.name == "brick" {
             print("You win!")
             brick.removeFromParent()
+            score += 1
+            displayScoreLabel()
             ball.removeFromParent()
+            
+            
         }
         
         if contact.bodyA.node?.name == "loseZone" || contact.bodyB.node?.name == "brick" {
             print("You lose!")
             ball.removeFromParent()
+            lives -= 1
+            livesLabeles()
         }
     }
     
@@ -120,5 +134,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         loseZone.physicsBody = SKPhysicsBody(rectangleOf: loseZone.size)
         loseZone.physicsBody?.isDynamic = false
         addChild(loseZone)
+    }
+    
+    func livesLabeles() {
+       let livesLabels = SKLabelNode(fontNamed: "Arial")
+        livesLabels.text = "Lives: \(lives)"
+        livesLabels.position = CGPoint(x: frame.minX + 40, y: frame.minY + 10)
+        livesLabels.name = "livesLabels"
+        livesLabels.color = UIColor.white
+        livesLabels.fontSize  = 20
+        addChild(livesLabels)
+        
+    }
+    
+    func displayScoreLabel() {
+        let scoreLabels = SKLabelNode(fontNamed: "Arial")
+        scoreLabels.text = "Score: \(score)"
+        scoreLabels.position = CGPoint(x: frame.maxX - 40, y: frame.minY + 10)
+        scoreLabels.fontColor = UIColor.white
+        scoreLabels.name = "scoreLabels"
+        scoreLabels.fontSize = 20
+        addChild(scoreLabels)
     }
 }
