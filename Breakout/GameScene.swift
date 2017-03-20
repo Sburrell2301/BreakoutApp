@@ -85,9 +85,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if contact.bodyA.node?.name == "loseZone" || contact.bodyB.node?.name == "brick" {
             print("You lose!")
-            ball.removeFromParent()
             lives -= 1
             livesLabeles()
+            resetGame()
+            kickBall()
         }
     }
     
