@@ -45,7 +45,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         paddle.removeFromParent()
         makePaddle()
         makeBrick()
-        updateLabels()
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     
@@ -55,8 +54,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             for node in nodes(at: location) {
                 if node.name == "play" {
-                    score = 0
-                    lives = 3
+                    updateLabels()
                     resetGame()
                     kickBall()
                 }
