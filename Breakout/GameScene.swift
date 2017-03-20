@@ -162,6 +162,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreLabels.fontSize = 20
         addChild(scoreLabels)
     }
+    
+    func displayPlayLabel() {
+        let playLabels = SKLabelNode(fontNamed: "Arial")
+        playLabels.position = CGPoint(x: frame.midX, y: frame.midY)
+        playLabels.text = "Tap to start playing"
+        playLabels.fontColor = UIColor.white
+        playLabels.fontSize = 40
+        playLabels.name = "playLabels"
+        addChild(playLabels)
+    }
+    
     func updateLabels() {
         score = 0
         lives = 3
