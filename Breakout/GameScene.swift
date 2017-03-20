@@ -19,6 +19,7 @@ var score = 0
 var lives = 3
 
 
+
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
@@ -30,6 +31,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         makeLoseZone()
         livesLabeles()
         displayScoreLabel()
+        displayPlayLabel()
+  
+    }
+    func kickBall() {
         ball.physicsBody?.isDynamic = true
         ball.physicsBody?.applyImpulse(CGVector(dx: 5, dy: 3))
     }
@@ -43,9 +48,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         updateLabels()
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    
         for touch in touches {
             let location = touch.location(in: self)
             paddle.position.x = location.x
+            
+            for node in nodes(at: location) {
+                if node.name == "play" {
+                    score = 0
+                    lives = 3
+                    resetGame()
+                    kickBall()
+                }
+            }
         }
         
     }
@@ -169,7 +184,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         playLabels.text = "Tap to start playing"
         playLabels.fontColor = UIColor.white
         playLabels.fontSize = 40
-        playLabels.name = "playLabels"
+        playLabels.name = "play"
         addChild(playLabels)
     }
     
