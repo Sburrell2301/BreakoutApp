@@ -17,16 +17,16 @@ var livesLabel = SKLabelNode()
 var scoreLabel = SKLabelNode()
 var score = 0
 var lives = 3
-var bricks = [SKSpriteNode]()
-var brick1 = [SKSpriteNode]()
-var brick2 = [SKSpriteNode]()
-var brick3 = [SKSpriteNode]()
-var brick4 = [SKSpriteNode]()
-var brick5 = [SKSpriteNode]()
-var brick6 = [SKSpriteNode]()
-var brick7 = [SKSpriteNode]()
-var brick8 = [SKSpriteNode]()
-
+var bricks = SKSpriteNode()
+var brick1 = SKSpriteNode()
+var brick2 = SKSpriteNode()
+var brick3 = SKSpriteNode()
+var brick4 = SKSpriteNode()
+var brick5 = SKSpriteNode()
+var brick6 = SKSpriteNode()
+var brick7 = SKSpriteNode()
+var brick8 = SKSpriteNode()
+var isPlaying = false
 
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
@@ -40,7 +40,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         makeLoseZone()
         livesLabeles()
         displayScoreLabel()
-        displayPlayLabel()
+        if isPlaying == false {
+            displayPlayLabel()
+        }
+        else {
+            playLabel.removeFromParent()
+        }
+        
   
     }
     func kickBall() {
@@ -73,9 +79,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             for node in nodes(at: location) {
                 if node.name == "play" {
-                    updateLabels()
-                    resetGame()
                     kickBall()
+                    isPlaying = true
                 }
             }
         }
@@ -95,17 +100,79 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             brick.removeFromParent()
             score += 1
             displayScoreLabel()
-            ball.removeFromParent()
-            
-            
+        }
+        
+       else if contact.bodyA.node?.name == "bricks" || contact.bodyB.node?.name == "brick" {
+            print("You win!")
+            brick.removeFromParent()
+            score += 1
+            displayScoreLabel()
+        }
+        
+        else if contact.bodyA.node?.name == "brick1" || contact.bodyB.node?.name == "brick" {
+            print("You win!")
+            brick.removeFromParent()
+            score += 1
+            displayScoreLabel()
+        }
+        
+       else if contact.bodyA.node?.name == "brick2" || contact.bodyB.node?.name == "brick" {
+            print("You win!")
+            brick.removeFromParent()
+            score += 1
+            displayScoreLabel()
+        }
+       else if contact.bodyA.node?.name == "brick3" || contact.bodyB.node?.name == "brick" {
+            print("You win!")
+            brick.removeFromParent()
+            score += 1
+            displayScoreLabel()
+        }
+       else if contact.bodyA.node?.name == "brick4" || contact.bodyB.node?.name == "brick" {
+            print("You win!")
+            brick.removeFromParent()
+            score += 1
+            displayScoreLabel()
+        }
+       else if contact.bodyA.node?.name == "brick5" || contact.bodyB.node?.name == "brick" {
+            print("You win!")
+            brick.removeFromParent()
+            score += 1
+            displayScoreLabel()
+        }
+       else if contact.bodyA.node?.name == "brick6" || contact.bodyB.node?.name == "brick" {
+            print("You win!")
+            brick.removeFromParent()
+            score += 1
+            displayScoreLabel()
+        }
+       else if contact.bodyA.node?.name == "brick7" || contact.bodyB.node?.name == "brick" {
+            print("You win!")
+            brick.removeFromParent()
+            score += 1
+            displayScoreLabel()
+        }
+       else if contact.bodyA.node?.name == "brick8" || contact.bodyB.node?.name == "brick" {
+            print("You win!")
+            brick.removeFromParent()
+            score += 1
+            displayScoreLabel()
         }
         
         if contact.bodyA.node?.name == "loseZone" || contact.bodyB.node?.name == "brick" {
             print("You lose!")
+            ball.removeFromParent()
             lives -= 1
             livesLabeles()
-            resetGame()
-            kickBall()
+            if lives == 0 {
+                resetGame()
+                updateLabels()
+                isPlaying = false
+            }
+            else {
+                makeBall()
+                kickBall()
+            }
         }
     }
     
@@ -155,6 +222,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         paddle.physicsBody = SKPhysicsBody(rectangleOf: paddle.size)
         paddle.physicsBody?.isDynamic = false
         addChild(paddle)
+    }
+    
+    func makeAllBricks() {
+        makeBrick()
+        makeBricks()
+        makeBrick1()
+        makeBrick2()
+        makeBrick3()
+        makeBrick4()
+        makeBrick5()
+        makeBrick6()
+        makeBrick7()
+        makeBrick8()
     }
 
     func makeBrick() {
