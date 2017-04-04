@@ -17,6 +17,15 @@ var livesLabel = SKLabelNode()
 var scoreLabel = SKLabelNode()
 var score = 0
 var lives = 3
+var bricks = [SKSpriteNode]()
+var brick1 = [SKSpriteNode]()
+var brick2 = [SKSpriteNode]()
+var brick3 = [SKSpriteNode]()
+var brick4 = [SKSpriteNode]()
+var brick5 = [SKSpriteNode]()
+var brick6 = [SKSpriteNode]()
+var brick7 = [SKSpriteNode]()
+var brick8 = [SKSpriteNode]()
 
 
 
@@ -45,6 +54,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         paddle.removeFromParent()
         makePaddle()
         makeBrick()
+        makeBricks()
+        makeBrick1()
+        makeBrick2()
+        makeBrick3()
+        makeBrick4()
+        makeBrick5()
+        makeBrick6()
+        makeBrick7()
+        makeBrick8()
+        
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     
@@ -137,7 +156,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         paddle.physicsBody?.isDynamic = false
         addChild(paddle)
     }
-    
+
     func makeBrick() {
         brick = SKSpriteNode(color: UIColor.blue, size: CGSize (width: frame.width/5, height: frame.height/25))
         brick.position = CGPoint(x: frame.midX, y: frame.maxY - 30)
@@ -145,11 +164,95 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         brick.physicsBody = SKPhysicsBody(rectangleOf: brick.size)
         brick.physicsBody?.isDynamic = false
         addChild(brick)
+        
+    }
+
+    func makeBricks() {
+        brick = SKSpriteNode(color: UIColor.blue, size: CGSize (width: frame.width/5, height: frame.height/25))
+        brick.physicsBody = SKPhysicsBody(rectangleOf: brick.size)
+        brick.position = CGPoint(x: frame.midX + 76, y: frame.maxY - 30)
+        brick.physicsBody?.isDynamic = false
+        brick.name = "bricks"
+        addChild(brick)
+
     }
     
+    func makeBrick1() {
+        brick = SKSpriteNode(color: UIColor.blue, size: CGSize (width: frame.width/5, height: frame.height/25))
+        brick.physicsBody = SKPhysicsBody(rectangleOf: brick.size)
+        brick.position = CGPoint(x: frame.midX + 152, y: frame.maxY - 30)
+        brick.physicsBody?.isDynamic = false
+        brick.name = "brick1"
+        addChild(brick)
+    }
+    
+    func makeBrick2() {
+        brick = SKSpriteNode(color: UIColor.blue, size: CGSize (width: frame.width/5, height: frame.height/25))
+        brick.physicsBody = SKPhysicsBody(rectangleOf: brick.size)
+        brick.position = CGPoint(x: frame.midX - 76, y: frame.maxY - 30)
+        brick.physicsBody?.isDynamic = false
+        brick.name = "brick2"
+        addChild(brick)
+    }
+    
+    func makeBrick3() {
+        brick = SKSpriteNode(color: UIColor.blue, size: CGSize (width: frame.width/5, height: frame.height/25))
+        brick.physicsBody = SKPhysicsBody(rectangleOf: brick.size)
+        brick.position = CGPoint(x: frame.midX - 152, y: frame.maxY - 30)
+        brick.physicsBody?.isDynamic = false
+        brick.name = "brick3"
+        addChild(brick)
+    }
+    
+    func makeBrick4() {
+        brick = SKSpriteNode(color: UIColor.red, size: CGSize (width: frame.width/5, height: frame.height/25))
+        brick.position = CGPoint(x: frame.midX, y: frame.maxY - 75)
+        brick.name = "brick4"
+        brick.physicsBody = SKPhysicsBody(rectangleOf: brick.size)
+        brick.physicsBody?.isDynamic = false
+        addChild(brick)
+    }
+    
+    func makeBrick5() {
+        brick = SKSpriteNode(color: UIColor.red, size: CGSize (width: frame.width/5, height: frame.height/25))
+        brick.position = CGPoint(x: frame.midX + 76, y: frame.maxY - 75)
+        brick.name = "brick5"
+        brick.physicsBody = SKPhysicsBody(rectangleOf: brick.size)
+        brick.physicsBody?.isDynamic = false
+        addChild(brick)
+    }
+    
+    func makeBrick6() {
+        brick = SKSpriteNode(color: UIColor.red, size: CGSize (width: frame.width/5, height: frame.height/25))
+        brick.position = CGPoint(x: frame.midX + 152, y: frame.maxY - 75)
+        brick.name = "brick6"
+        brick.physicsBody = SKPhysicsBody(rectangleOf: brick.size)
+        brick.physicsBody?.isDynamic = false
+        addChild(brick)
+    }
+    
+    func makeBrick7() {
+        brick = SKSpriteNode(color: UIColor.red, size: CGSize (width: frame.width/5, height: frame.height/25))
+        brick.position = CGPoint(x: frame.midX - 76, y: frame.maxY - 75)
+        brick.name = "brick7"
+        brick.physicsBody = SKPhysicsBody(rectangleOf: brick.size)
+        brick.physicsBody?.isDynamic = false
+        addChild(brick)
+    }
+    
+    func makeBrick8() {
+        brick = SKSpriteNode(color: UIColor.red, size: CGSize (width: frame.width/5, height: frame.height/25))
+        brick.position = CGPoint(x: frame.midX - 152, y: frame.maxY - 75)
+        brick.name = "brick8"
+        brick.physicsBody = SKPhysicsBody(rectangleOf: brick.size)
+        brick.physicsBody?.isDynamic = false
+        addChild(brick)
+    }
+    
+
     func makeLoseZone() {
         let loseZone = SKSpriteNode(color: UIColor.red, size: CGSize(width: frame.width, height: 50))
-        loseZone.position = CGPoint(x: frame.midX, y: frame.minY + 25)
+        loseZone.position = CGPoint(x: frame.midX, y: frame.minY - 30)
         loseZone.name = "loseZone"
         loseZone.physicsBody = SKPhysicsBody(rectangleOf: loseZone.size)
         loseZone.physicsBody?.isDynamic = false
