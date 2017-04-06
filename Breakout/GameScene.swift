@@ -43,7 +43,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if isPlaying == false {
             displayPlayLabel()
         }
-        else {
+        if isPlaying == true {
             playLabel.removeFromParent()
         }
         
@@ -59,16 +59,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         makeBall()
         paddle.removeFromParent()
         makePaddle()
-        makeBrick()
-        makeBricks()
-        makeBrick1()
-        makeBrick2()
-        makeBrick3()
-        makeBrick4()
-        makeBrick5()
-        makeBrick6()
-        makeBrick7()
-        makeBrick8()
+        makeAllBricks()
         
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -102,63 +93,68 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             displayScoreLabel()
         }
         
-       else if contact.bodyA.node?.name == "bricks" || contact.bodyB.node?.name == "brick" {
+       else if contact.bodyA.node?.name == "bricks" || contact.bodyB.node?.name == "bricks" {
             print("You win!")
-            brick.removeFromParent()
+            bricks.removeFromParent()
             score += 1
             displayScoreLabel()
         }
         
-        else if contact.bodyA.node?.name == "brick1" || contact.bodyB.node?.name == "brick" {
+        else if contact.bodyA.node?.name == "brick1" || contact.bodyB.node?.name == "brick1" {
             print("You win!")
-            brick.removeFromParent()
+            brick1.removeFromParent()
             score += 1
             displayScoreLabel()
         }
         
-       else if contact.bodyA.node?.name == "brick2" || contact.bodyB.node?.name == "brick" {
+       else if contact.bodyA.node?.name == "brick2" || contact.bodyB.node?.name == "brick2" {
             print("You win!")
-            brick.removeFromParent()
+            brick2.removeFromParent()
             score += 1
             displayScoreLabel()
         }
-       else if contact.bodyA.node?.name == "brick3" || contact.bodyB.node?.name == "brick" {
+       else if contact.bodyA.node?.name == "brick3" || contact.bodyB.node?.name == "brick3" {
             print("You win!")
-            brick.removeFromParent()
+            brick3.removeFromParent()
             score += 1
             displayScoreLabel()
         }
-       else if contact.bodyA.node?.name == "brick4" || contact.bodyB.node?.name == "brick" {
+       else if contact.bodyA.node?.name == "brick4" || contact.bodyB.node?.name == "brick4" {
             print("You win!")
-            brick.removeFromParent()
+            brick4.removeFromParent()
             score += 1
             displayScoreLabel()
         }
-       else if contact.bodyA.node?.name == "brick5" || contact.bodyB.node?.name == "brick" {
+       else if contact.bodyA.node?.name == "brick5" || contact.bodyB.node?.name == "brick5" {
             print("You win!")
-            brick.removeFromParent()
+            brick5.removeFromParent()
             score += 1
             displayScoreLabel()
         }
-       else if contact.bodyA.node?.name == "brick6" || contact.bodyB.node?.name == "brick" {
+       else if contact.bodyA.node?.name == "brick6" || contact.bodyB.node?.name == "brick6" {
             print("You win!")
-            brick.removeFromParent()
+            brick6.removeFromParent()
             score += 1
             displayScoreLabel()
         }
-       else if contact.bodyA.node?.name == "brick7" || contact.bodyB.node?.name == "brick" {
+       else if contact.bodyA.node?.name == "brick7" || contact.bodyB.node?.name == "brick7" {
             print("You win!")
-            brick.removeFromParent()
+            brick7.removeFromParent()
             score += 1
             displayScoreLabel()
         }
-       else if contact.bodyA.node?.name == "brick8" || contact.bodyB.node?.name == "brick" {
+       else if contact.bodyA.node?.name == "brick8" || contact.bodyB.node?.name == "brick8" {
             print("You win!")
-            brick.removeFromParent()
+            brick8.removeFromParent()
             score += 1
             displayScoreLabel()
         }
-        
+        if score == 10 {
+            resetGame()
+            updateLabels()
+            isPlaying = false
+            
+        }
         if contact.bodyA.node?.name == "loseZone" || contact.bodyB.node?.name == "brick" {
             print("You lose!")
             ball.removeFromParent()
@@ -248,85 +244,85 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     func makeBricks() {
-        brick = SKSpriteNode(color: UIColor.blue, size: CGSize (width: frame.width/5, height: frame.height/25))
-        brick.physicsBody = SKPhysicsBody(rectangleOf: brick.size)
-        brick.position = CGPoint(x: frame.midX + 76, y: frame.maxY - 30)
-        brick.physicsBody?.isDynamic = false
-        brick.name = "bricks"
-        addChild(brick)
+        bricks = SKSpriteNode(color: UIColor.blue, size: CGSize (width: frame.width/5, height: frame.height/25))
+        bricks.physicsBody = SKPhysicsBody(rectangleOf: brick.size)
+        bricks.position = CGPoint(x: frame.midX + 76, y: frame.maxY - 30)
+        bricks.physicsBody?.isDynamic = false
+        bricks.name = "bricks"
+        addChild(bricks)
 
     }
     
     func makeBrick1() {
-        brick = SKSpriteNode(color: UIColor.blue, size: CGSize (width: frame.width/5, height: frame.height/25))
-        brick.physicsBody = SKPhysicsBody(rectangleOf: brick.size)
-        brick.position = CGPoint(x: frame.midX + 152, y: frame.maxY - 30)
-        brick.physicsBody?.isDynamic = false
-        brick.name = "brick1"
-        addChild(brick)
+        brick1 = SKSpriteNode(color: UIColor.blue, size: CGSize (width: frame.width/5, height: frame.height/25))
+        brick1.physicsBody = SKPhysicsBody(rectangleOf: brick.size)
+        brick1.position = CGPoint(x: frame.midX + 152, y: frame.maxY - 30)
+        brick1.physicsBody?.isDynamic = false
+        brick1.name = "brick1"
+        addChild(brick1)
     }
     
     func makeBrick2() {
-        brick = SKSpriteNode(color: UIColor.blue, size: CGSize (width: frame.width/5, height: frame.height/25))
-        brick.physicsBody = SKPhysicsBody(rectangleOf: brick.size)
-        brick.position = CGPoint(x: frame.midX - 76, y: frame.maxY - 30)
-        brick.physicsBody?.isDynamic = false
-        brick.name = "brick2"
-        addChild(brick)
+        brick2 = SKSpriteNode(color: UIColor.blue, size: CGSize (width: frame.width/5, height: frame.height/25))
+        brick2.physicsBody = SKPhysicsBody(rectangleOf: brick.size)
+        brick2.position = CGPoint(x: frame.midX - 76, y: frame.maxY - 30)
+        brick2.physicsBody?.isDynamic = false
+        brick2.name = "brick2"
+        addChild(brick2)
     }
     
     func makeBrick3() {
-        brick = SKSpriteNode(color: UIColor.blue, size: CGSize (width: frame.width/5, height: frame.height/25))
-        brick.physicsBody = SKPhysicsBody(rectangleOf: brick.size)
-        brick.position = CGPoint(x: frame.midX - 152, y: frame.maxY - 30)
-        brick.physicsBody?.isDynamic = false
-        brick.name = "brick3"
-        addChild(brick)
+        brick3 = SKSpriteNode(color: UIColor.blue, size: CGSize (width: frame.width/5, height: frame.height/25))
+        brick3.physicsBody = SKPhysicsBody(rectangleOf: brick.size)
+        brick3.position = CGPoint(x: frame.midX - 152, y: frame.maxY - 30)
+        brick3.physicsBody?.isDynamic = false
+        brick3.name = "brick3"
+        addChild(brick3)
     }
     
     func makeBrick4() {
-        brick = SKSpriteNode(color: UIColor.red, size: CGSize (width: frame.width/5, height: frame.height/25))
-        brick.position = CGPoint(x: frame.midX, y: frame.maxY - 75)
-        brick.name = "brick4"
-        brick.physicsBody = SKPhysicsBody(rectangleOf: brick.size)
-        brick.physicsBody?.isDynamic = false
-        addChild(brick)
+        brick4 = SKSpriteNode(color: UIColor.red, size: CGSize (width: frame.width/5, height: frame.height/25))
+        brick4.position = CGPoint(x: frame.midX, y: frame.maxY - 75)
+        brick4.name = "brick4"
+        brick4.physicsBody = SKPhysicsBody(rectangleOf: brick.size)
+        brick4.physicsBody?.isDynamic = false
+        addChild(brick4)
     }
     
     func makeBrick5() {
-        brick = SKSpriteNode(color: UIColor.red, size: CGSize (width: frame.width/5, height: frame.height/25))
-        brick.position = CGPoint(x: frame.midX + 76, y: frame.maxY - 75)
-        brick.name = "brick5"
-        brick.physicsBody = SKPhysicsBody(rectangleOf: brick.size)
-        brick.physicsBody?.isDynamic = false
-        addChild(brick)
+        brick5 = SKSpriteNode(color: UIColor.red, size: CGSize (width: frame.width/5, height: frame.height/25))
+        brick5.position = CGPoint(x: frame.midX + 76, y: frame.maxY - 75)
+        brick5.name = "brick5"
+        brick5.physicsBody = SKPhysicsBody(rectangleOf: brick.size)
+        brick5.physicsBody?.isDynamic = false
+        addChild(brick5)
     }
     
     func makeBrick6() {
-        brick = SKSpriteNode(color: UIColor.red, size: CGSize (width: frame.width/5, height: frame.height/25))
-        brick.position = CGPoint(x: frame.midX + 152, y: frame.maxY - 75)
-        brick.name = "brick6"
-        brick.physicsBody = SKPhysicsBody(rectangleOf: brick.size)
-        brick.physicsBody?.isDynamic = false
-        addChild(brick)
+        brick6 = SKSpriteNode(color: UIColor.red, size: CGSize (width: frame.width/5, height: frame.height/25))
+        brick6.position = CGPoint(x: frame.midX + 152, y: frame.maxY - 75)
+        brick6.name = "brick6"
+        brick6.physicsBody = SKPhysicsBody(rectangleOf: brick.size)
+        brick6.physicsBody?.isDynamic = false
+        addChild(brick6)
     }
     
     func makeBrick7() {
-        brick = SKSpriteNode(color: UIColor.red, size: CGSize (width: frame.width/5, height: frame.height/25))
-        brick.position = CGPoint(x: frame.midX - 76, y: frame.maxY - 75)
-        brick.name = "brick7"
-        brick.physicsBody = SKPhysicsBody(rectangleOf: brick.size)
-        brick.physicsBody?.isDynamic = false
-        addChild(brick)
+        brick7 = SKSpriteNode(color: UIColor.red, size: CGSize (width: frame.width/5, height: frame.height/25))
+        brick7.position = CGPoint(x: frame.midX - 76, y: frame.maxY - 75)
+        brick7.name = "brick7"
+        brick7.physicsBody = SKPhysicsBody(rectangleOf: brick.size)
+        brick7.physicsBody?.isDynamic = false
+        addChild(brick7)
     }
     
     func makeBrick8() {
-        brick = SKSpriteNode(color: UIColor.red, size: CGSize (width: frame.width/5, height: frame.height/25))
-        brick.position = CGPoint(x: frame.midX - 152, y: frame.maxY - 75)
-        brick.name = "brick8"
-        brick.physicsBody = SKPhysicsBody(rectangleOf: brick.size)
-        brick.physicsBody?.isDynamic = false
-        addChild(brick)
+        brick8 = SKSpriteNode(color: UIColor.red, size: CGSize (width: frame.width/5, height: frame.height/25))
+        brick8.position = CGPoint(x: frame.midX - 152, y: frame.maxY - 75)
+        brick8.name = "brick8"
+        brick8.physicsBody = SKPhysicsBody(rectangleOf: brick.size)
+        brick8.physicsBody?.isDynamic = false
+        addChild(brick8)
     }
     
 
